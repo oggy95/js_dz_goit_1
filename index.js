@@ -7,13 +7,13 @@ async function testContactsLib() {
         const listOfContacts = await contacts.listContacts();
         console.log(listOfContacts);
 
-        const contact = await contacts.getContactById(2);
+        const contact = await contacts.getContactById("2");
         console.log("Contact:", contact);
 
         const new_contacts = await contacts.addContact("Berlard", "berlards@gmail.com", "+401567843");
         console.log("New list", new_contacts);
 
-        const removed_contact = await contacts.removeContact(12);
+        const removed_contact = await contacts.removeContact("12");
         console.log("Removed contact", removed_contact);
     } catch (e) {
         console.error("Error spawned. Details:", e.toString());

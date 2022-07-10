@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import * as url from 'url';
+import {nanoid} from "nanoid";
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -21,7 +22,7 @@ async function listContacts() {
  */
 async function getContactById(contactId) {
     const contacts = await listContacts();
-    const result = contacts.find(item => parseInt(item.id) === contactId);
+    const result = contacts.find(item => item.id === contactId);
     return result ? result : null;
 }
 
@@ -32,7 +33,7 @@ async function getContactById(contactId) {
  */
 async function removeContact(contactId) {
     const contacts = await listContacts();
-    const idx = contacts.findIndex(item => parseInt(item.id) === contactId);
+    const idx = contacts.findIndex(item => item.id === contactId);
     if (idx === -1) {
         return null;
     }
@@ -57,9 +58,8 @@ async function updateContacts(contacts) {
  */
 async function addContact(name, email, phone) {
     const contacts = await listContacts();
-    const id = (contacts.length + 1).toString();
     const insertObject = {
-        id,
+        id: nanoid(),
         name,
         email,
         phone
